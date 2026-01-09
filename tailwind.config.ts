@@ -29,7 +29,9 @@ export default {
         lime: "var(--lime)",
         "purple-start": "var(--purple-start)",
         "purple-end": "var(--purple-end)",
-        "icon-bg": "var(--icon-bg)",
+        "accent-emerald": "var(--accent-emerald)",
+        "accent-blue": "var(--accent-blue)",
+        "accent-purple": "var(--accent-purple)",
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
