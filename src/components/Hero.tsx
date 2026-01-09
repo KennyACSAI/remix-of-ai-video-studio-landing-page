@@ -1,188 +1,264 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Menu, X, Play } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 export function Hero() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  const navItems = [
+    { label: 'Categories', href: '#portfolio' },
+    { label: 'How it Works', href: '#about' },
+    { label: 'Pricing', href: '#services' },
+    { label: 'Research', href: '#awards' },
+    { label: 'Mission', href: '#team' },
+  ]
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) element.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handleNavClick = (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const id = href.startsWith('#') ? href.slice(1) : href
+    setIsMobileMenuOpen(false)
+    scrollToSection(id)
+  }
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
     }
-    return () => { document.body.style.overflow = 'unset' }
   }, [isMobileMenuOpen])
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden gradient-purple">
-      {/* Decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-40 left-10 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-lime/20 rounded-full blur-2xl" />
+    <div className="relative min-h-screen w-full overflow-hidden" style={{ background: 'linear-gradient(135deg, #6D35D3 0%, #7636E4 50%, #8B54E2 100%)' }}>
+      
+      {/* === GRADIENT MESH ORBS === */}
+      <div 
+        className="absolute -top-20 -right-20 h-96 w-96 rounded-full blur-3xl animate-pulse"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(139, 84, 226, 0.6) 0%, transparent 70%)',
+          animationDuration: '4s'
+        }} 
+      />
+      
+      <motion.div 
+        className="absolute -bottom-32 -left-32 h-[500px] w-[500px] rounded-full blur-3xl"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(25, 190, 218, 0.5) 0%, transparent 70%)'
+        }}
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.5, 0.7, 0.5]
+        }}
+        transition={{ 
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div 
+        className="absolute top-1/4 -left-20 h-80 w-80 rounded-full blur-3xl"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(254, 121, 106, 0.45) 0%, transparent 70%)'
+        }}
+        animate={{ 
+          y: [0, 30, 0],
+          x: [0, 20, 0],
+          scale: [1, 1.05, 1]
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div 
+        className="absolute top-1/3 right-10 h-64 w-64 rounded-full blur-3xl"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(25, 190, 218, 0.4) 0%, transparent 70%)'
+        }}
+        animate={{ 
+          y: [0, -40, 0],
+          scale: [1, 1.15, 1]
+        }}
+        transition={{ 
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      
+      <motion.div 
+        className="absolute bottom-20 right-1/4 h-72 w-72 rounded-full blur-3xl"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(255, 183, 107, 0.4) 0%, transparent 70%)'
+        }}
+        animate={{ 
+          x: [0, -30, 0],
+          y: [0, 20, 0],
+          opacity: [0.4, 0.6, 0.4]
+        }}
+        transition={{ 
+          duration: 9,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
+      
+      <motion.div 
+        className="absolute top-1/2 left-1/3 h-40 w-40 rounded-full blur-2xl"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(159, 104, 255, 0.5) 0%, transparent 70%)'
+        }}
+        animate={{ 
+          scale: [1, 1.3, 1],
+          opacity: [0.3, 0.6, 0.3]
+        }}
+        transition={{ 
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.5
+        }}
+      />
+
+      <div 
+        className="absolute top-0 right-0 h-full w-1/2 opacity-10"
+        style={{ 
+          background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)'
+        }}
+      />
 
       {/* Navbar */}
-      <motion.nav
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="fixed top-0 left-0 right-0 w-full z-[110]"
-      >
-        <div className={`w-full px-6 sm:px-8 lg:px-12 py-4 transition-all duration-300 ${
-          isScrolled ? 'glass-navbar shadow-sm' : 'bg-transparent'
-        }`}>
-          <div className="flex items-center justify-between max-w-7xl mx-auto">
+      <nav className="fixed left-0 right-0 top-0 z-[110] w-full">
+        <div
+          className={`w-full px-6 py-4 transition-all duration-300 sm:px-8 lg:px-12 ${
+            isScrolled ? 'glass-navbar shadow-sm' : 'bg-transparent'
+          }`}
+        >
+          <div className="mx-auto flex max-w-7xl items-center justify-between">
             {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center cursor-pointer"
+            <div
+              className="flex cursor-pointer items-center"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <span className={`font-bold text-xl tracking-tight ${isScrolled ? 'text-foreground' : 'text-white'}`}>
+              <span
+                className="text-xl font-bold tracking-tight"
+                style={{ color: isScrolled ? '#1B1E27' : '#FFFFFF' }}
+              >
                 REAL?
               </span>
-              <span className="ml-2 px-2 py-0.5 bg-lime text-accent-foreground text-xs font-semibold rounded-full">
+              <span 
+                className="ml-2 rounded-full px-2 py-0.5 text-xs font-semibold text-white"
+                style={{ backgroundColor: 'rgba(25, 190, 218, 0.3)', backdropFilter: 'blur(4px)' }}
+              >
                 BETA
               </span>
-            </motion.div>
+            </div>
 
             {/* Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {['Features', 'How it Works', 'Pricing', 'Team'].map((item) => (
+            <div className="hidden items-center space-x-8 md:flex">
+              {navItems.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
-                  className={`font-medium gentle-animation hover:opacity-70 ${isScrolled ? 'text-foreground' : 'text-white'}`}
+                  key={item.label}
+                  href={item.href}
+                  onClick={handleNavClick(item.href)}
+                  className="font-medium gentle-animation hover:opacity-70"
+                  style={{ color: isScrolled ? '#1B1E27' : '#FFFFFF' }}
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
             </div>
 
-            {/* CTA */}
-            <div className="flex items-center gap-3">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden sm:flex items-center gap-2 bg-lime text-accent-foreground font-semibold px-6 py-3 rounded-full hover:bg-lime/90 gentle-animation"
-              >
-                <Play className="w-4 h-4 fill-current" />
-                Play Now
-              </motion.button>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`md:hidden p-3 rounded-full gentle-animation ${isScrolled ? 'bg-secondary' : 'bg-white/20'}`}
-              >
-                {isMobileMenuOpen ? (
-                  <X className={`w-5 h-5 ${isScrolled ? 'text-foreground' : 'text-white'}`} />
-                ) : (
-                  <Menu className={`w-5 h-5 ${isScrolled ? 'text-foreground' : 'text-white'}`} />
-                )}
-              </button>
-            </div>
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              className={`rounded-full p-3 gentle-animation md:hidden ${
+                isScrolled ? 'bg-secondary' : 'bg-white/20'
+              }`}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" style={{ color: isScrolled ? '#1B1E27' : '#FFFFFF' }} />
+              ) : (
+                <Menu className="h-5 w-5" style={{ color: isScrolled ? '#1B1E27' : '#FFFFFF' }} />
+              )}
+            </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-md z-[80]"
+          <div
+            className="fixed inset-0 z-[80] bg-black/50 backdrop-blur-md md:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="md:hidden fixed top-0 right-0 h-full w-72 bg-card z-[90] p-6"
-          >
-            <div className="flex flex-col space-y-4 mt-16">
-              {['Features', 'How it Works', 'Pricing', 'Team'].map((item) => (
+          <div className="fixed right-0 top-0 z-[90] h-full w-72 bg-card p-6 md:hidden">
+            <div className="mt-16 flex flex-col space-y-4">
+              {navItems.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
-                  className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg font-medium text-lg"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  key={item.label}
+                  href={item.href}
+                  className="rounded-lg px-4 py-3 text-lg font-medium hover:bg-secondary"
+                  style={{ color: '#1B1E27' }}
+                  onClick={handleNavClick(item.href)}
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
-              <button className="mt-4 bg-lime text-accent-foreground font-semibold px-6 py-3 rounded-full">
-                Play Now
-              </button>
             </div>
-          </motion.div>
+          </div>
         </>
       )}
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="max-w-4xl"
         >
-          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-8">
-            <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
-            <span className="text-white/90 text-sm font-medium">New: Video detection now live</span>
-          </div>
-          
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-tight mb-6">
-            Can You Tell What's
-            <span className="block">Human vs AI?</span>
+          <h1 className="mb-6 text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+            Guess what&apos;s
+            <span className="block bg-gradient-to-r from-white via-white to-teal-200 bg-clip-text text-transparent">REAL vs AI</span>
           </h1>
-          
-          <p className="text-xl sm:text-2xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Test your perception. Challenge your assumptions. See where your judgment fails you.
+
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+            See where your judgment fails you. Train your eye to spot the difference between human creativity and AI
+            generation.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 bg-lime text-accent-foreground font-bold px-8 py-4 rounded-full text-lg"
+          {/* Challenge text */}
+          <div className="mx-auto mt-8 max-w-xl">
+            <div 
+              className="rounded-2xl p-5 backdrop-blur-md border border-white/20"
+              style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(25,190,218,0.1) 100%)' }}
             >
-              <Play className="w-5 h-5 fill-current" />
-              Start Playing Free
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white font-semibold px-8 py-4 rounded-full text-lg border border-white/30"
-            >
-              Watch Demo
-            </motion.button>
-          </div>
-
-          {/* Stats */}
-          <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto">
-            {[
-              { value: '50K+', label: 'Players' },
-              { value: '2M+', label: 'Rounds Played' },
-              { value: '67%', label: 'Avg Accuracy' },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl font-black text-white">{stat.value}</div>
-                <div className="text-white/60 text-sm">{stat.label}</div>
-              </div>
-            ))}
+              <p className="text-base font-medium text-white">🎯 Can you tell the difference? Test your perception skills.</p>
+            </div>
           </div>
         </motion.div>
       </div>

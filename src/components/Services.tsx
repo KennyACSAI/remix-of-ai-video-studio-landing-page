@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Check, Sparkles } from 'lucide-react'
+import { Check, Crown } from 'lucide-react'
 
 export function Services() {
   const plans = [
@@ -12,125 +11,99 @@ export function Services() {
       description: 'Perfect for casual players',
       features: [
         '5 rounds per day',
-        'Text detection only',
+        'Mix mode only',
         'Basic leaderboard',
         'Standard difficulty',
       ],
-      cta: 'Start Free',
       popular: false,
     },
     {
       name: 'Pro',
-      price: '$9',
-      period: '/month',
-      description: 'For serious AI detectives',
+      price: '$3.99',
+      period: 'one-time',
+      description: 'Unlock everything forever',
       features: [
         'Unlimited rounds',
-        'All content types',
-        'Premium leaderboard',
-        'All difficulty levels',
-        'Detailed explanations',
-        'Achievement badges',
+        'All categories: Text, Articles, Images, Video',
+        'Party Mode with friends',
+        'Detailed accuracy breakdown',
+        'No ads ever',
+        'Yours forever',
       ],
-      cta: 'Go Pro',
       popular: true,
-    },
-    {
-      name: 'Team',
-      price: '$29',
-      period: '/month',
-      description: 'Challenge your friends',
-      features: [
-        'Everything in Pro',
-        'Up to 10 team members',
-        'Private leaderboards',
-        'Team challenges',
-        'Custom content uploads',
-        'Priority support',
-      ],
-      cta: 'Start Team',
-      popular: false,
     },
   ]
 
   return (
-    <section id="services" className="relative py-20 bg-card/50">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+    <section id="services" className="relative py-6" style={{ backgroundColor: 'transparent' }}>
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-lime rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-muted-foreground">
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center gap-3 mb-3">
+            <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
+            <span className="text-sm font-semibold" style={{ color: '#6B7280' }}>
               Pricing
             </span>
-            <div className="w-3 h-3 bg-accent-purple rounded-full animate-pulse" />
+            <div className="w-3 h-3 bg-teal rounded-full animate-pulse" />
           </div>
           
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6 text-foreground">
-            Choose Your Plan
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-3" style={{ color: '#1B1E27' }}>
+            Unlock Everything
           </h2>
           
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-            Start free, upgrade when you're ready
+          <p className="text-lg leading-relaxed max-w-3xl mx-auto" style={{ color: '#6B7280' }}>
+            One purchase. Yours forever. No subscriptions.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {plans.map((plan, index) => (
-            <motion.div
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+          {plans.map((plan) => (
+            <div
               key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className={`relative bg-card rounded-3xl p-8 border ${
+              className={`relative rounded-3xl p-5 border backdrop-blur-sm ${
                 plan.popular ? 'border-primary shadow-lg' : 'border-border subtle-shadow'
               }`}
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 px-4 py-1 bg-lime text-accent-foreground text-sm font-bold rounded-full">
-                    <Sparkles className="w-4 h-4" />
-                    Most Popular
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1 px-3 py-0.5 gradient-purple text-white text-xs font-bold rounded-full">
+                    <Crown className="w-3 h-3" />
+                    Best Value
                   </span>
                 </div>
               )}
               
-              <div className="text-center mb-8">
-                <h3 className="text-xl font-bold text-foreground mb-2">{plan.name}</h3>
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-bold mb-1" style={{ color: '#1B1E27' }}>{plan.name}</h3>
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-5xl font-black text-foreground">{plan.price}</span>
-                  <span className="text-muted-foreground">{plan.period}</span>
+                  <span className="text-4xl font-black" style={{ color: '#1B1E27' }}>{plan.price}</span>
+                  <span style={{ color: '#6B7280' }}>{plan.period}</span>
                 </div>
-                <p className="text-muted-foreground mt-2">{plan.description}</p>
+                <p className="mt-1 text-sm" style={{ color: '#6B7280' }}>{plan.description}</p>
               </div>
 
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-2">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3">
-                    <div className="w-5 h-5 bg-accent-emerald/20 rounded-full flex items-center justify-center">
-                      <Check className="w-3 h-3 text-accent-emerald" />
+                  <li key={feature} className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#4EB57033' }}>
+                      <Check className="w-2.5 h-2.5" style={{ color: '#4EB570' }} />
                     </div>
-                    <span className="text-foreground">{feature}</span>
+                    <span className="text-sm" style={{ color: '#1B1E27' }}>{feature}</span>
                   </li>
                 ))}
               </ul>
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`w-full py-4 rounded-2xl font-bold text-lg ${
-                  plan.popular
-                    ? 'gradient-purple text-white'
-                    : 'bg-secondary text-foreground hover:bg-secondary/80'
-                } gentle-animation`}
-              >
-                {plan.cta}
-              </motion.button>
-            </motion.div>
+            </div>
           ))}
+        </div>
+
+        {/* Trust badges */}
+        <div className="mt-4 text-center">
+          <p className="text-sm" style={{ color: '#6B7280' }}>
+            Your data is private and secure. We only use Apple Sign In for authentication.
+          </p>
         </div>
       </div>
     </section>
