@@ -1,154 +1,106 @@
 'use client'
 
-import { useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { Mail, MessageCircle, Play } from 'lucide-react'
 
 export function Contact() {
-
-  useEffect(() => {
-    // Load Cal.com embed script
-    const script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.innerHTML = `
-      (function (C, A, L) { 
-        let p = function (a, ar) { a.q.push(ar); }; 
-        let d = C.document; 
-        C.Cal = C.Cal || function () { 
-          let cal = C.Cal; 
-          let ar = arguments; 
-          if (!cal.loaded) { 
-            cal.ns = {}; 
-            cal.q = cal.q || []; 
-            d.head.appendChild(d.createElement("script")).src = A; 
-            cal.loaded = true; 
-          } 
-          if (ar[0] === L) { 
-            const api = function () { p(api, arguments); }; 
-            const namespace = ar[1]; 
-            api.q = api.q || []; 
-            if(typeof namespace === "string"){
-              cal.ns[namespace] = cal.ns[namespace] || api;
-              p(cal.ns[namespace], ar);
-              p(cal, ["initNamespace", namespace]);
-            } else p(cal, ar); 
-            return;
-          } 
-          p(cal, ar); 
-        }; 
-      })(window, "https://app.cal.com/embed/embed.js", "init");
-      
-      Cal("init", "mojju-discovery-call", {origin:"https://app.cal.com"});
-      
-      Cal.ns["mojju-discovery-call"]("inline", {
-        elementOrSelector:"#my-cal-inline-mojju-discovery-call",
-        config: {"layout":"month_view"},
-        calLink: "mojli/30min",
-      });
-      
-      Cal.ns["mojju-discovery-call"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-    `
-    
-    document.body.appendChild(script)
-    
-    return () => {
-      // Cleanup script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script)
-      }
-    }
-  }, [])
-
   return (
-    <section id="contact" className="relative py-32 bg-card/30">
+    <section id="contact" className="relative py-32 bg-card/50">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-accent-emerald rounded-full animate-pulse" />
+            <div className="w-3 h-3 bg-lime rounded-full animate-pulse" />
             <span className="text-sm font-semibold text-muted-foreground">
-              Let's Create Together
+              Get Started
             </span>
-            <div className="w-3 h-3 bg-accent-blue rounded-full animate-pulse" />
+            <div className="w-3 h-3 bg-accent-purple rounded-full animate-pulse" />
           </div>
           
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-8">
-            <span className="block mb-2">Ready to Light Up the Screen?</span>
-            
+            <span className="block mb-2">Ready to Test</span>
+            <span className="block">Your Perception?</span>
           </h2>
           
           <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Book a discovery call to discuss your project and see how we can bring your vision to cinematic reality
+            Join thousands of players already sharpening their AI detection skills
           </p>
         </div>
 
-        {/* Cal.com Booking Widget */}
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-background clean-border rounded-3xl overflow-hidden elevated-shadow">
-            {/* Widget Header */}
-            <div className="bg-card/50 px-8 py-6 border-b border-border">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-black text-foreground mb-1">
-                    MOJJU Discovery Call
-                  </h3>
-                  <p className="text-muted-foreground">
-                    30 minutes • Video call • Free consultation
-                  </p>
-                </div>
-                <div className="hidden sm:flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-accent-emerald rounded-full" />
-                  <span className="text-sm text-muted-foreground font-medium">Available now</span>
-                </div>
-              </div>
+        {/* CTA Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4 }}
+            className="bg-card rounded-3xl p-8 subtle-shadow border border-border text-center"
+          >
+            <div className="w-16 h-16 gradient-purple rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <Play className="w-8 h-8 text-white fill-white" />
             </div>
-            
-            {/* Cal.com Embed Container */}
-            <div className="p-0 bg-white">
-              <div 
-                style={{
-                  width: '100%',
-                  height: '600px',
-                  overflow: 'scroll'
-                }} 
-                id="my-cal-inline-mojju-discovery-call"
-              />
+            <h3 className="text-2xl font-black text-foreground mb-3">Start Playing</h3>
+            <p className="text-muted-foreground mb-6">
+              Jump right in and test your skills. No account required for free mode.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-lime text-accent-foreground font-bold py-4 rounded-2xl text-lg"
+            >
+              Play Free Now
+            </motion.button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            whileHover={{ y: -4 }}
+            className="bg-card rounded-3xl p-8 subtle-shadow border border-border text-center"
+          >
+            <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <MessageCircle className="w-8 h-8 text-primary" />
             </div>
-          </div>
+            <h3 className="text-2xl font-black text-foreground mb-3">Have Questions?</h3>
+            <p className="text-muted-foreground mb-6">
+              Reach out to our team. We'd love to hear your feedback and ideas.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-secondary text-foreground font-bold py-4 rounded-2xl text-lg hover:bg-secondary/80 gentle-animation"
+            >
+              Contact Us
+            </motion.button>
+          </motion.div>
         </div>
 
-        {/* Bottom Info */}
-        <div className="text-center mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-blue rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Project Discussion</h4>
-              <p className="text-muted-foreground text-sm">
-                Share your vision and requirements with our team
-              </p>
-            </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-emerald/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-emerald rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Custom Strategy</h4>
-              <p className="text-muted-foreground text-sm">
-                Get a tailored approach for your unique project
-              </p>
-            </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-purple rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Next Steps</h4>
-              <p className="text-muted-foreground text-sm">
-                Clear timeline and roadmap to bring your idea to life
-              </p>
+        {/* Newsletter */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-16 max-w-2xl mx-auto"
+        >
+          <div className="bg-card rounded-3xl p-8 subtle-shadow border border-border text-center">
+            <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-foreground mb-2">Stay Updated</h3>
+            <p className="text-muted-foreground mb-6">Get notified about new features and game modes</p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-6 py-4 bg-secondary rounded-2xl text-foreground placeholder:text-muted-foreground border-0 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="gradient-purple text-white font-bold px-8 py-4 rounded-2xl"
+              >
+                Subscribe
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

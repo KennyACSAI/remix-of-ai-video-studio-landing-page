@@ -1,119 +1,93 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import minimalBestFilm from '../assets/minimal-best-film.png'
-import minimalAudienceChoice from '../assets/minimal-audience-choice.png'
-import minimalInnovation from '../assets/minimal-innovation.png'
-import minimalDirectorsChoice from '../assets/minimal-directors-choice.png'
-import minimalExcellence from '../assets/minimal-excellence.png'
-import minimalRisingTalent from '../assets/minimal-rising-talent.png'
+import { motion } from 'framer-motion'
+import { Trophy, Target, Zap, Crown, Star, Award } from 'lucide-react'
 
 export function Awards() {
-  const awards = [
-    {
-      image: minimalBestFilm,
-      delay: "0s"
-    },
-    {
-      image: minimalAudienceChoice,
-      delay: "0.5s"
-    },
-    {
-      image: minimalInnovation,
-      delay: "1s"
-    },
-    {
-      image: minimalDirectorsChoice,
-      delay: "1.5s"
-    },
-    {
-      image: minimalExcellence,
-      delay: "2s"
-    },
-    {
-      image: minimalRisingTalent,
-      delay: "2.5s"
-    }
+  const achievements = [
+    { icon: Trophy, label: 'Perfect Round', description: '10 correct in a row', color: 'text-yellow-500' },
+    { icon: Target, label: 'Sharp Eye', description: '90% accuracy rate', color: 'text-accent-emerald' },
+    { icon: Zap, label: 'Speed Demon', description: 'Under 2s per answer', color: 'text-accent-blue' },
+    { icon: Crown, label: 'AI Detective', description: 'Complete all modes', color: 'text-accent-purple' },
+    { icon: Star, label: 'Rising Star', description: 'Top 10% of players', color: 'text-orange-500' },
+    { icon: Award, label: 'Legend', description: '1000+ rounds played', color: 'text-pink-500' },
   ]
 
   return (
-    <section id="awards" className="relative py-20 bg-background overflow-hidden">
-      
-      {/* Elegant Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
-      
-
-
+    <section id="awards" className="relative py-20 bg-card/50 overflow-hidden">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-accent-purple rounded-full animate-pulse" />
+            <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" />
             <span className="text-sm font-semibold text-muted-foreground">
-              Recognition & Achievement
+              Achievements
             </span>
-            <div className="w-3 h-3 bg-accent-blue rounded-full animate-pulse" />
+            <div className="w-3 h-3 bg-accent-purple rounded-full animate-pulse" />
           </div>
           
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6 text-foreground">
-            Awards & Recognition
+            Unlock Badges
           </h2>
           
           <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-            Celebrated excellence in AI-powered film production
+            Earn achievements as you improve your detection skills
           </p>
         </div>
 
-        {/* Awards Display */}
-        <div className="relative max-w-7xl mx-auto">
-          
-          {/* Awards Grid */}
-          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {awards.map((award, index) => (
-              <div
-                key={index}
-                className="group relative flex flex-col items-center text-center"
-                style={{ animationDelay: award.delay }}
-              >
-                
-                {/* Award Pedestal */}
-                <div className="relative mb-6">
-                  
-                  {/* Floating Award Display */}
-                  <div className={`relative p-6 rounded-2xl border shadow-md transition-all duration-500 hover:scale-105 ${
-                    index === 2 || index === 3 ? 'bg-gray-800 border-gray-700' : 'bg-background border-border'
-                  }`}
-                       style={{ 
-                         boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
-                       }}>
-                    
-                    {/* Award Image */}
-                    <img 
-                      src={award.image}
-                      alt="Film Festival Award Laurel"
-                      className="w-full h-auto max-w-48 mx-auto"
-                      style={{
-                        filter: 'contrast(1.02) saturate(1.1)',
-                      }}
-                    />
-                    
-
-                  </div>
-                  
-                  {/* Floating Animation */}
-                  <div className="float-gentle absolute inset-0 pointer-events-none" />
-                </div>
-
+        {/* Achievements Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+          {achievements.map((achievement, index) => (
+            <motion.div
+              key={achievement.label}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ scale: 1.05, y: -4 }}
+              className="bg-card rounded-2xl p-6 subtle-shadow border border-border text-center cursor-pointer gentle-animation"
+            >
+              <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <achievement.icon className={`w-8 h-8 ${achievement.color}`} />
               </div>
-            ))}
-          </div>
-
+              <h3 className="font-bold text-foreground mb-1 text-sm">{achievement.label}</h3>
+              <p className="text-muted-foreground text-xs">{achievement.description}</p>
+            </motion.div>
+          ))}
         </div>
 
-
+        {/* Leaderboard Preview */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-16 max-w-2xl mx-auto"
+        >
+          <div className="bg-card rounded-3xl p-8 subtle-shadow border border-border">
+            <h3 className="text-2xl font-black text-foreground mb-6 text-center">Top Players This Week</h3>
+            <div className="space-y-4">
+              {[
+                { rank: 1, name: 'AIHunter99', score: 2450, avatar: '🏆' },
+                { rank: 2, name: 'RealOrNot', score: 2380, avatar: '🥈' },
+                { rank: 3, name: 'DetectiveBot', score: 2290, avatar: '🥉' },
+              ].map((player) => (
+                <div key={player.rank} className="flex items-center justify-between p-4 bg-secondary/50 rounded-2xl">
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl">{player.avatar}</span>
+                    <div>
+                      <div className="font-bold text-foreground">{player.name}</div>
+                      <div className="text-sm text-muted-foreground">Rank #{player.rank}</div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-black text-foreground text-lg">{player.score}</div>
+                    <div className="text-xs text-muted-foreground">points</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
-      
     </section>
   )
 }
