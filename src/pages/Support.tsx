@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { Send, Mail, MessageSquare, HelpCircle, RefreshCw, AlertCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_MV_tnBsCOr04J4_oge0QRCO5t4hz4orimZrabflDRex6qb9blpw_YoHerLZUOBQ9/exec'
 
@@ -17,6 +17,12 @@ export default function Support() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState(false)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -24,6 +30,12 @@ export default function Support() {
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleBackToHome = (e: React.MouseEvent) => {
+    e.preventDefault()
+    navigate('/')
+    setTimeout(() => window.scrollTo(0, 0), 0)
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -168,8 +180,9 @@ export default function Support() {
           >
             <div className="mx-auto flex max-w-7xl items-center justify-between">
               {/* Logo - Links back to main page */}
-              <Link
-                to="/"
+              <a
+                href="/"
+                onClick={handleBackToHome}
                 className="flex cursor-pointer items-center"
               >
                 <span
@@ -184,11 +197,12 @@ export default function Support() {
                 >
                   BETA
                 </span>
-              </Link>
+              </a>
 
               {/* Back to Home Button */}
-              <Link
-                to="/"
+              <a
+                href="/"
+                onClick={handleBackToHome}
                 className="font-semibold gentle-animation hover:opacity-90 px-5 py-2.5 transition-all duration-300"
                 style={{
                   backgroundColor: isScrolled ? '#0D9488' : '#FFFFFF',
@@ -197,7 +211,7 @@ export default function Support() {
                 }}
               >
                 ← Back to Home
-              </Link>
+              </a>
             </div>
           </div>
         </nav>

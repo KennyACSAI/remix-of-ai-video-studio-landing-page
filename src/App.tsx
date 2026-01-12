@@ -9,6 +9,7 @@ import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { ParticlesBackground } from './components/ParticlesBackground'
 import Support from './pages/Support'
+import PrivacyPolicy from './pages/Privacypolicy'
 
 // Home page component containing all landing page sections
 function Home() {
@@ -34,6 +35,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           </Routes>
         </main>
         <Footer />
