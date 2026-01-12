@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export function Hero() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -186,6 +187,19 @@ export function Hero() {
                   {item.label}
                 </a>
               ))}
+              
+              {/* Support Button */}
+              <Link
+                to="/support"
+                className="font-semibold gentle-animation hover:opacity-90 px-5 py-2.5 transition-all duration-300"
+                style={{
+                  backgroundColor: isScrolled ? '#7636E4' : '#FFFFFF',
+                  color: isScrolled ? '#FFFFFF' : '#7636E4',
+                  borderRadius: '999px',
+                }}
+              >
+                Support
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -228,6 +242,15 @@ export function Hero() {
                   {item.label}
                 </a>
               ))}
+              {/* Support Button in Mobile Menu */}
+              <Link
+                to="/support"
+                className="rounded-full px-4 py-3 text-lg font-semibold text-center mt-2"
+                style={{ backgroundColor: '#7636E4', color: '#FFFFFF' }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Support
+              </Link>
             </div>
           </div>
         </>
