@@ -5,7 +5,8 @@ import { Send, Mail, MessageSquare, HelpCircle, RefreshCw, AlertCircle } from 'l
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_MV_tnBsCOr04J4_oge0QRCO5t4hz4orimZrabflDRex6qb9blpw_YoHerLZUOBQ9/exec'
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyZclQetAexf3cDD8npzqc7l6aMiOEPcucxF7H7-tQXjXnWQQmjgFK7Tf1UDC9uQE02kg/exec";
 
 export default function Support() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -46,35 +47,41 @@ export default function Support() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitError(false)
-    
-    try {
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message
-        })
-      })
-      
-      // With no-cors mode, we can't read the response, but if no error was thrown, assume success
-      setSubmitSuccess(true)
-      setFormData({ email: '', subject: '', message: '' })
-      
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitError(true)
-    } finally {
-      setIsSubmitting(false)
-    }
+  e.preventDefault()
+  setIsSubmitting(true)
+  setSubmitError(false)
+
+  try {
+    const body = new URLSearchParams({
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      userAgent: navigator.userAgent,
+      pageUrl: window.location.href,
+    })
+
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body,
+    })
+
+    const json = await res.json()
+
+    if (!json.ok) throw new Error(json.error || "Unknown server error")
+
+    setSubmitSuccess(true)
+    setFormData({ email: "", subject: "", message: "" })
+  } catch (error) {
+    console.error("Error submitting form:", error)
+    setSubmitError(true)
+  } finally {
+    setIsSubmitting(false)
   }
+}
+
 
   const handleSendAnother = () => {
     setSubmitSuccess(false)
