@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { Hero } from './components/Hero'
 import { Portfolio } from './components/Portfolio'
 import { Awards } from './components/Awards'
@@ -10,8 +10,8 @@ import { Footer } from './components/Footer'
 import { ParticlesBackground } from './components/ParticlesBackground'
 import Support from './pages/Support'
 import PrivacyPolicy from './pages/Privacypolicy'
+import DownloadPage from './pages/Download'
 
-// Home page component containing all landing page sections
 function Home() {
   return (
     <>
@@ -26,20 +26,36 @@ function Home() {
   )
 }
 
+function AppContent() {
+  const location = useLocation()
+  const isDownload = location.pathname === '/download'
+
+  const routes = (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/download" element={<DownloadPage />} />
+      <Route path="/support" element={<Support />} />
+      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+    </Routes>
+  )
+
+  if (isDownload) return routes
+
+  return (
+    <div className="min-h-screen text-foreground relative">
+      <ParticlesBackground />
+      <main className="relative z-10" role="main">
+        {routes}
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen text-foreground relative">
-        <ParticlesBackground />
-        <main className="relative z-10" role="main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <AppContent />
     </BrowserRouter>
   )
 }

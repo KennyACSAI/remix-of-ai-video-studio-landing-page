@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Download } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -44,106 +44,108 @@ export function Hero() {
   }, [isMobileMenuOpen])
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden" style={{ background: 'linear-gradient(135deg, #6D35D3 0%, #7636E4 50%, #8B54E2 100%)' }}>
-      
+    <div
+      className="relative min-h-screen w-full overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #6D35D3 0%, #7636E4 50%, #8B54E2 100%)' }}
+    >
       {/* === GRADIENT MESH ORBS === */}
-      <div 
+      <div
         className="absolute -top-20 -right-20 h-96 w-96 rounded-full blur-3xl animate-pulse"
-        style={{ 
+        style={{
           background: 'radial-gradient(circle, rgba(139, 84, 226, 0.6) 0%, transparent 70%)',
-          animationDuration: '4s'
-        }} 
-      />
-      
-      <motion.div 
-        className="absolute -bottom-32 -left-32 h-[500px] w-[500px] rounded-full blur-3xl"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(25, 190, 218, 0.5) 0%, transparent 70%)'
-        }}
-        animate={{ 
-          scale: [1, 1.1, 1],
-          opacity: [0.5, 0.7, 0.5]
-        }}
-        transition={{ 
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      
-      <motion.div 
-        className="absolute top-1/4 -left-20 h-80 w-80 rounded-full blur-3xl"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(254, 121, 106, 0.45) 0%, transparent 70%)'
-        }}
-        animate={{ 
-          y: [0, 30, 0],
-          x: [0, 20, 0],
-          scale: [1, 1.05, 1]
-        }}
-        transition={{ 
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      
-      <motion.div 
-        className="absolute top-1/3 right-10 h-64 w-64 rounded-full blur-3xl"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(25, 190, 218, 0.4) 0%, transparent 70%)'
-        }}
-        animate={{ 
-          y: [0, -40, 0],
-          scale: [1, 1.15, 1]
-        }}
-        transition={{ 
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
-      
-      <motion.div 
-        className="absolute bottom-20 right-1/4 h-72 w-72 rounded-full blur-3xl"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(255, 183, 107, 0.4) 0%, transparent 70%)'
-        }}
-        animate={{ 
-          x: [0, -30, 0],
-          y: [0, 20, 0],
-          opacity: [0.4, 0.6, 0.4]
-        }}
-        transition={{ 
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
-      
-      <motion.div 
-        className="absolute top-1/2 left-1/3 h-40 w-40 rounded-full blur-2xl"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(159, 104, 255, 0.5) 0%, transparent 70%)'
-        }}
-        animate={{ 
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.6, 0.3]
-        }}
-        transition={{ 
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5
+          animationDuration: '4s',
         }}
       />
 
-      <div 
+      <motion.div
+        className="absolute -bottom-32 -left-32 h-[500px] w-[500px] rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(25, 190, 218, 0.5) 0%, transparent 70%)',
+        }}
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.5, 0.7, 0.5],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <motion.div
+        className="absolute top-1/4 -left-20 h-80 w-80 rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(254, 121, 106, 0.45) 0%, transparent 70%)',
+        }}
+        animate={{
+          y: [0, 30, 0],
+          x: [0, 20, 0],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <motion.div
+        className="absolute top-1/3 right-10 h-64 w-64 rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(25, 190, 218, 0.4) 0%, transparent 70%)',
+        }}
+        animate={{
+          y: [0, -40, 0],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 1,
+        }}
+      />
+
+      <motion.div
+        className="absolute bottom-20 right-1/4 h-72 w-72 rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(255, 183, 107, 0.4) 0%, transparent 70%)',
+        }}
+        animate={{
+          x: [0, -30, 0],
+          y: [0, 20, 0],
+          opacity: [0.4, 0.6, 0.4],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 2,
+        }}
+      />
+
+      <motion.div
+        className="absolute top-1/2 left-1/3 h-40 w-40 rounded-full blur-2xl"
+        style={{
+          background: 'radial-gradient(circle, rgba(159, 104, 255, 0.5) 0%, transparent 70%)',
+        }}
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 0.5,
+        }}
+      />
+
+      <div
         className="absolute top-0 right-0 h-full w-1/2 opacity-10"
-        style={{ 
-          background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)'
+        style={{
+          background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
         }}
       />
 
@@ -160,13 +162,10 @@ export function Hero() {
               className="flex cursor-pointer items-center"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <span
-                className="text-xl font-bold tracking-tight"
-                style={{ color: isScrolled ? '#1B1E27' : '#FFFFFF' }}
-              >
+              <span className="text-xl font-bold tracking-tight" style={{ color: isScrolled ? '#1B1E27' : '#FFFFFF' }}>
                 REAL?
               </span>
-              <span 
+              <span
                 className="ml-2 rounded-full px-2 py-0.5 text-xs font-semibold text-white"
                 style={{ backgroundColor: 'rgba(25, 190, 218, 0.3)', backdropFilter: 'blur(4px)' }}
               >
@@ -187,7 +186,7 @@ export function Hero() {
                   {item.label}
                 </a>
               ))}
-              
+
               {/* Support Button */}
               <Link
                 to="/support"
@@ -206,9 +205,7 @@ export function Hero() {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((v) => !v)}
-              className={`rounded-full p-3 gentle-animation md:hidden ${
-                isScrolled ? 'bg-secondary' : 'bg-white/20'
-              }`}
+              className={`rounded-full p-3 gentle-animation md:hidden ${isScrolled ? 'bg-secondary' : 'bg-white/20'}`}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
             >
@@ -242,7 +239,6 @@ export function Hero() {
                   {item.label}
                 </a>
               ))}
-              {/* Support Button in Mobile Menu */}
               <Link
                 to="/support"
                 className="rounded-full px-4 py-3 text-lg font-semibold text-center mt-2"
@@ -266,7 +262,9 @@ export function Hero() {
         >
           <h1 className="mb-6 text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
             Guess what&apos;s
-            <span className="block bg-gradient-to-r from-white via-white to-teal-200 bg-clip-text text-transparent">REAL vs AI</span>
+            <span className="block bg-gradient-to-r from-white via-white to-teal-200 bg-clip-text text-transparent">
+              REAL vs AI
+            </span>
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
@@ -274,14 +272,28 @@ export function Hero() {
             generation.
           </p>
 
-          {/* Challenge text */}
-          <div className="mx-auto mt-8 max-w-xl">
-            <div 
-              className="rounded-2xl p-5 backdrop-blur-md border border-white/20"
-              style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(25,190,218,0.1) 100%)' }}
+          {/* Download button (replaces the old big rectangle text) */}
+          <div className="mx-auto mt-8">
+            <a
+              href="/download"
+              className={[
+                'inline-flex items-center gap-2',
+                'rounded-full px-5 py-2.5',
+                'border border-white/25',
+                'backdrop-blur-md',
+                'text-base font-semibold text-white',
+                'transition-all duration-300',
+                'hover:scale-[1.02] hover:border-white/40',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent',
+              ].join(' ')}
+              style={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(25,190,218,0.10) 100%)',
+              }}
+              aria-label="Download"
             >
-              <p className="text-base font-medium text-white">🎯 Can you tell the difference? Test your perception skills.</p>
-            </div>
+              <Download className="h-4 w-4" />
+              Download
+            </a>
           </div>
         </motion.div>
       </div>
