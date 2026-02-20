@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Hero } from './components/Hero'
 import { Portfolio } from './components/Portfolio'
 import { Awards } from './components/Awards'
@@ -58,6 +59,7 @@ export default function App() {
     <BrowserRouter>
       <AppContent />
       <Analytics />
+      <SpeedInsights />
     </BrowserRouter>
   )
 }
